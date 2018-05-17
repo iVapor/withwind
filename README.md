@@ -1,5 +1,5 @@
 # WithWind Music
-It's a simple beautiful music player.
+It's a simple gorgeous music player.
 
 ## The preview of WithWind Music.
 ![]( https://github.com/iVapor/withwind/raw/master/WithWindMusic.gif )
