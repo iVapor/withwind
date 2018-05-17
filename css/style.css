@@ -1,24 +1,23 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);
 body {
     font-family: 'Roboto', sans-serif;
-    background: #3ae1e3;
-    overflow: hidden;
+    background: url("../icon/background.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    box-sizing: border-box;
+    margin: 0;
 }
 
 .logo {
-    /*display:inline;*/
     width:100px;
     height:100px;
 }
 
 audio {
-    position: absolute;
+    position: relative;
 }
 
 header {
-    position: absolute;
-    left: 34%;
-    transform: translateX(-50%);
+   text-align: center;
 }
 
 h2 {
@@ -40,19 +39,26 @@ p {
 }
 
 .audio-player {
+    position: relative;
+    margin: 0 auto;
+    padding: 1em;
+    max-width: 23em;
+    background: hsla(0,0%,100%,.25) border-box;
+    overflow: hidden;
+    border-radius: .3em;
+    box-shadow: 0 0 0 1px hsla(0,0%,100%,.3) inset,
+    0 .5em 1em rgba(0, 0, 0, 0.6);
+    text-shadow: 0 1px 1px hsla(0,0%,100%,.3);
+}
+
+.audio-player::before{
+    content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    transition: all 0.2s;
-    width: 80vw;
-    max-width: 400px;
-    background: white;
-    box-sizing: border-box;
-    margin-top: 80px;
+    top: 0; right: 0; bottom: 0; left: 0;
+    margin: -30px;
+    z-index: -1;
+    -webkit-filter: blur(20px);
+    filter: blur(20px);
 }
 
 @media screen and (max-width: 560px) {
@@ -69,13 +75,14 @@ p {
 
 .cover-art {
     position: absolute;
-    top: -56px;
-    right: -30px;
-    width: 150px;
-    height: 150px;
+    top: 15px;
+    right: 19px;
+    width: 120px;
+    height: 120px;
     background-color: pink;
     background-size: cover;
     transition: all 0.2s;
+    border: whitesmoke 2px solid;
 }
 
 @media screen and (max-width: 520px) {
@@ -111,7 +118,6 @@ p {
     display: flex;
     width: 100%;
     height: 100px;
-    background: white;
     margin-top: -1px;
     padding: 20px;
     box-sizing: border-box;
@@ -188,13 +194,11 @@ th {
 .playList td {
     border-top: grey solid thin;
     padding-left: 20px;
-    background-color: #DFE1CB;
 }
 
 .playList td:hover {
     color: #FBFBEF;
 }
-
 
 .playList img {
     width:20px;
@@ -203,7 +207,7 @@ th {
 }
 
 .playList img:hover {
-    background-color: #FBFBEF;
+    background-color: #BDBDBD;
 }
 
 .close {

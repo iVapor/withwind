@@ -4,16 +4,22 @@ var audio = document.getElementById('audio')
 // html5 function - toggle play/pause btn and audio
 
 $("#plays_btn").click(function() {
-
     if (audio.paused == false) {
         audio.pause()
-        $("#play_btn").show()
-        $("#pause_btn").hide()
     } else {
         audio.play()
-        $("#play_btn").hide()
-        $("#pause_btn").show()
     }
+})
+
+//control the play and pause button show or hide
+audio.addEventListener('play', function () {
+    $("#play_btn").hide()
+    $("#pause_btn").show()
+})
+
+audio.addEventListener('pause', function () {
+    $("#play_btn").show()
+    $("#pause_btn").hide()
 })
 
 audio.addEventListener("timeupdate", function() {
