@@ -1,6 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Times New Roman', sans-serif;
     background: url("../icon/background.jpeg") no-repeat center center fixed;
     background-size: cover;
     box-sizing: border-box;
@@ -100,8 +99,8 @@ p {
 @media screen and (max-height: 500px) {
     .cover-art {
         display: none;
-        width: 0px;
-        height: 0px;
+        width: 0;
+        height: 0;
     }
 }
 .cover-art a {

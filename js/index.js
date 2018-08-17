@@ -1,10 +1,8 @@
-var log = console.log.bind(console)
 var audio = document.getElementById('audio')
 
 // html5 function - toggle play/pause btn and audio
-
 $("#plays_btn").click(function() {
-    if (audio.paused == false) {
+    if (audio.paused === false) {
         audio.pause()
     } else {
         audio.play()
@@ -22,20 +20,10 @@ audio.addEventListener('pause', function () {
     $("#pause_btn").hide()
 })
 
+// count function for time left
 audio.addEventListener("timeupdate", function() {
-    var currentTime = audio.currentTime,
-        duration = audio.duration,
-        currentTimeMs = audio.currentTime * 1000
-    $('.progressbar_range').stop(true, true).animate({'width': (currentTime + .25) / duration * 100 + '%'}, 250, 'linear')
-})
-
-
-// count function for timeleft
-
-audio.addEventListener("timeupdate", function() {
-    var timeleft = document.getElementById('timeleft')
-    var duration = parseInt( audio.duration )
-    var currentTime = parseInt( audio.currentTime )
+    var duration = parseInt( audio.duration || 0 )
+    var currentTime = parseInt( audio.currentTime || 0)
     var timeLeft = duration - currentTime
     
     var s = timeLeft % 60
@@ -50,24 +38,22 @@ audio.addEventListener("timeupdate", function() {
 
 //close the playlist by click button
 var closePlaylist = () => {
-    var listBotton = document.querySelector('#playlist_btn')
-    listBotton.addEventListener('click', () => {
+    var listBottom = document.querySelector('#playlist_btn')
+    listBottom.addEventListener('click', () => {
         var closeList = document.querySelector('.playList')
         closeList.classList.toggle('close')
     })
 }
 
-var makeSongAdress = (element) => {
+var makeSongAddress = (element) => {
     var songIndex = Number(element.dataset.index)
     var totalSong = provideTableInfo()
-    var adress = totalSong[songIndex].SongName
-    var url = '.\\musicLibrary\\' + adress
+    var address = totalSong[songIndex].SongName
 
-    return url
+    return '.\\musicLibrary\\' + address
 }
 
 var replaceMusic = (adress) => {
-    var player = document.querySelector('#audio')
     audio.src = adress
     audio.play()
 }
@@ -108,15 +94,15 @@ var listPlay = () => {
     var listPlay = document.querySelector('.playList')
     listPlay.addEventListener('click', (event) => {
         var targetSong = event.target
-        var songAdress = makeSongAdress(targetSong)
-        var replaceAudio = replaceMusic(songAdress)
+        var songAddress = makeSongAddress(targetSong)
+        replaceMusic(songAddress)
         var songIndex = Number(targetSong.dataset.index)
-        var replaceOthers = changeSongArtCov(songIndex)
+        changeSongArtCov(songIndex)
     })
 }
 
 var provideTableInfo = () => {
-    var musicLib = [
+    return [
         {
             ID:0,
             SongName:'Annika Wells - Break.mp3',
@@ -154,23 +140,19 @@ var provideTableInfo = () => {
             lrc: 'Taylor Swift - Shake It Off.lrc'
         },
     ]
-
-    return musicLib
 }
 
-var tableRows = (everySong, index) => {
+var tableRows = (everySong, songIndex) => {
     var Tit = everySong.Title
     var art = everySong.Artist
-    var songIndex = index
-    var td = `
+
+    return `
         <tr>
             <td>${Tit}</td>
             <td><img class="listplay" src="./icon/play.png" alt="play" data-index="${songIndex}"></td>
             <td>${art}s</td>
         </tr>
     `
-
-    return td
 }
 
 var addTableRows = () => {
@@ -189,17 +171,16 @@ var appendHtml = function(element, html) {
 
 var makeSongAdressByIndex = (index) => {
     var totalSong = provideTableInfo()
-    var adress = totalSong[index].SongName
-    var url = '.\\musicLibrary\\' + adress
+    var address = totalSong[index].SongName
 
-    return url
+    return '.\\musicLibrary\\' + address
 }
 
-var getSongIndexbyName = (name) => {
+var getSongIndexByName = (name) => {
     var totalSong = provideTableInfo()
     for (var i = 0; i < totalSong.length; i++) {
         var songTitle = totalSong[i].Title;
-        if (songTitle == name) {
+        if (songTitle === name) {
             return i
         }
     }
@@ -208,9 +189,8 @@ var getSongIndexbyName = (name) => {
 var getCurSongIndex = () => {
     var songNameEle = document.querySelector('h2')
     var songName = songNameEle.innerHTML
-    var songIndex = getSongIndexbyName(songName)
 
-    return songIndex
+    return getSongIndexByName(songName)
 }
 
 var playSongByIndex = (index) => {
@@ -224,7 +204,7 @@ var buttonPlay = () => {
         var currentSong = getCurSongIndex()
         var next = 1
         var newSongIndex = currentSong + next
-        if (newSongIndex == 4) {
+        if (newSongIndex === 4) {
             newSongIndex = 0
         }
         playSongByIndex(newSongIndex)
@@ -236,7 +216,7 @@ var buttonPlay = () => {
         var currentSong = getCurSongIndex()
         var previous = -1
         var oldSongIndex = currentSong + previous
-        if (oldSongIndex == -1) {
+        if (oldSongIndex === -1) {
             oldSongIndex = 3
         }
         playSongByIndex(oldSongIndex)
